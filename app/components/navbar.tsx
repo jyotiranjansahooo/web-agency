@@ -105,6 +105,7 @@ export default function Navbar() {
       opacity: 1,
       duration: 0.3,
       ease: "power3.out",
+      font: "extrabold",
     });
 
     gsap.to(el, {
@@ -120,7 +121,7 @@ export default function Navbar() {
 
     gsap.to(el, {
       y: 0,
-      color: "#a1a1aa",
+      color: "white",
       duration: 0.25,
     });
   };
@@ -236,7 +237,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden text-white text-xl"
+            className="md:hidden bg-transparent! pr-3! text-white text-xl"
           >
             ☰
           </button>
@@ -244,21 +245,54 @@ export default function Navbar() {
       </div>
 
       {/* MOBILE MENU */}
-      <div
-        ref={mobileMenuRef}
-        className="fixed inset-0 z-40  flex-col items-center justify-center gap-6 bg-black hidden"
-      >
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            onClick={toggleMobileMenu}
-            className="mobile-link text-white text-3xl"
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+    <div
+  ref={mobileMenuRef}
+  className="fixed inset-0 z-40  flex-col items-center justify-center gap-6 
+             bg-linear-to-br from-[#0f1f14] via-[#132a13] to-black hidden"
+>
+  {NAV_LINKS.map((link) => (
+    <a
+      key={link.label}
+      href={link.href}
+      onClick={(e) => {
+        const el = e.currentTarget;
+
+        // click press animation
+        gsap.fromTo(
+          el,
+          { scale: 1 },
+          { scale: 0.88, duration: 0.12, yoyo: true, repeat: 1 }
+        );
+
+        toggleMobileMenu();
+      }}
+      onMouseEnter={(e) => {
+        gsap.to(e.currentTarget, {
+          scale: 1.12,
+          color: "#a7c957",
+          textShadow: "0 0 10px rgba(167,201,87,0.7)",
+          duration: 0.15,
+          ease: "power2.out",
+        });
+      }}
+      onMouseLeave={(e) => {
+        gsap.to(e.currentTarget, {
+          scale: 1.2,
+          color: "#ffffff",
+          textShadow: "0 0 0px rgba(0,0,0,0)",
+          duration: 0.15,
+          font: "extrabold",
+        });
+      }}
+      className="mobile-link text-white text-3xl relative transition-all duration-300"
+    >
+      {link.label}
+
+      {/* matcha underline */}
+      <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#a7c957] transition-all duration-300 group-hover:w-full"></span>
+    </a>
+  ))}
+</div>
     </>
   );
 }
