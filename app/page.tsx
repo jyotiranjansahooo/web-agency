@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import About from "./pages/about";
+import Services from "./pages/services";
+
 import {
   motion,
   useScroll,
@@ -526,7 +529,7 @@ export default function HeroHeader() {
 
           {/* Badge */}
           <motion.div
-            className="relative inline-flex items-center gap-2.5 px-4! py-1! mt-10! rounded-full border"
+            className="relative inline-flex items-center gap-2.5 px-4! py-1! lg:mt-20!   rounded-full border"
             style={{
               background: "rgba(36,64,28,0.55)",
               backdropFilter: "blur(14px)",
@@ -555,8 +558,8 @@ export default function HeroHeader() {
 
           {/* Headline */}
           <h1
-            className="font-display leading-[0.94] mb-7 select-none"
-            style={{ fontSize: "clamp(3.2rem, 10.5vw, 8.5rem)", fontWeight: 700 }}
+            className="font-display leading-[0.94] select-none"
+            style={{ fontSize: "clamp(3rem, 10vw, 8rem)", fontWeight: 700 }}
           >
             <span className="block overflow-hidden pb-2">
               <SplitText text="We craft" className="gradient-text" delay={0} stagger={0.042} started={ready} />
@@ -571,7 +574,7 @@ export default function HeroHeader() {
 
           {/* Sub-heading */}
           <motion.p
-            className="max-w-lg mt-4! text-base sm:text-lg leading-relaxed mb-10"
+            className="max-w-lg mt-2! text-base sm:text-lg leading-relaxed mb-10"
             style={{ color: "var(--m300)" }}
             initial={{ opacity: 0, y: 22 }}
             animate={ready ? { opacity: 1, y: 0 } : {}}
@@ -584,7 +587,7 @@ export default function HeroHeader() {
 
           {/* CTA Buttons */}
           <motion.div
-            className="flex flex-wrap items-center justify-center mt-2! mb-4! gap-4"
+            className="flex flex-wrap items-center justify-center mt-2 mb-2! gap-4"
             initial={{ opacity: 0, y: 22 }}
             animate={ready ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.9, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -641,7 +644,7 @@ export default function HeroHeader() {
             {stats.map((s, i) => (
               <motion.div
                 key={s.label}
-                className="flex flex-col items-center gap-1 mt-4!"
+                className="flex flex-col items-center gap-1 mt-4"
                 initial={{ opacity: 0, y: 14 }}
                 animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1.15 + i * 0.08, duration: 0.5 }}
@@ -663,7 +666,7 @@ export default function HeroHeader() {
 
           {/* Tech pills */}
           <motion.div
-            className="flex flex-wrap justify-center gap-2  mt-2! mb-2!"
+            className="flex flex-wrap justify-center gap-2  mt-1! mb-2!"
             initial={{ opacity: 0 }}
             animate={ready ? { opacity: 1 } : {}}
             transition={{ delay: 1.35, duration: 0.7 }}
@@ -721,6 +724,8 @@ export default function HeroHeader() {
           style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
         />
       </header>
+      <About/>
+      <Services/>
     </>
   );
 }

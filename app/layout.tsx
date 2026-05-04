@@ -4,7 +4,9 @@ import { Rubik } from "next/font/google";
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/navbar";
+import Footer from "./components/footer";
 import PageTransition from "@/app/components/PageTransition";
+import { TransitionProvider } from "@/app/components/TransitionContext";
 
 const rubik = Rubik({
   weight: ["400", "500", "700","800","900"],
@@ -41,10 +43,13 @@ export default function RootLayout({
       lang="en"
       className={`${rubik.variable} ${playfair.variable} ${dmSans.variable} ${jetbrains.variable} h-full antialiased`}
     >
-      <body >
-           <Navbar /> 
-          <PageTransition /> 
-        {children}
+      <body>
+        <TransitionProvider>
+          <Navbar />
+          <PageTransition />
+          {children}
+          <Footer />
+        </TransitionProvider>
       </body>
     </html>
   );
