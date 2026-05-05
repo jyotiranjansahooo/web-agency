@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 const NAV_LINKS = [
-  { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "#" },
+  { label: "Services", href: "../pages/about.tsx" },
+  { label: "About", href: "../pages/about.tsx" },
+  { label: "Contact", href: "../pages/contact.tsx" },
 ];
 
 export default function Navbar() {
@@ -229,7 +229,7 @@ export default function Navbar() {
             ref={ctaRef}
             onMouseEnter={handleCtaEnter}
             onMouseLeave={handleCtaLeave}
-            className="hidden md:block px-5! py-1! bg-purple-600 text-white rounded-xl"
+            className="hidden md:block px-5! py-1! bg-[#0F1D14]! text-white rounded-xl"
           >
             Start Project
           </button>

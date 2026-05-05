@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import About from "./pages/about";
-import Services from "./pages/services";
 
 import {
   motion,
@@ -725,7 +724,6 @@ export default function HeroHeader() {
         />
       </header>
       <About/>
-      <Services/>
     </>
   );
 }
