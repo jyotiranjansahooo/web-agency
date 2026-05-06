@@ -1,108 +1,125 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export default function Footer() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+const Skeleton = () => {
+  return (
+    <div className="animate-pulse flex flex-col items-center justify-center gap-6 py-16">
+      <div className="h-6 w-40 bg-green-200 rounded" />
+      <div className="h-4 w-64 bg-green-100 rounded" />
+      <div className="flex gap-4 mt-4">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="h-8 w-8 bg-green-200 rounded-full" />
+        ))}
+      </div>
+    </div>
+  );
+};
 
+const Footer = () => {
   useEffect(() => {
-    if (!ref.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".footer-item",
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.15,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 85%",
-          },
-        }
-      );
-    }, ref);
-
-    return () => ctx.revert();
+    gsap.from(".footer-item", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3.out",
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: ".footer",
+        start: "top 85%",
+      },
+    });
   }, []);
 
-  return (
-    <footer
-      ref={ref}
-      className="relative overflow-hidden bg-[#e6f2e6] text-gray-800 px-6 md:px-16 py-16"
-    >
-      {/* Glass Bubble Background */}
-      <div className="absolute inset-0 backdrop-blur-3xl bg-white/30" />
+  const isLoading = false;
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1 }}
-        className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10"
-      >
+  if (isLoading) return <Skeleton />;
+
+  return (
+    <footer className="footer flex justify-center w-full bg-linear-to-b from-[#03420f] via-[#156225] to-[#41784e] text-green-900 py-16 px-4">
+      <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-10">
+
         {/* Brand */}
-        <div className="footer-item space-y-4">
-          <h2 className="text-2xl font-bold">Your Agency</h2>
-          <p className="text-sm text-gray-600">
-            Building modern, high-performance digital experiences.
+        <motion.div
+          className="footer-item"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl md:text-4xl! font-bold mt-4! font-serif text-gray-300">
+            @Orivon Agency
+          </h2>
+          <p className="mt-4 text-sm md:text-base text-white max-w-md mx-auto">
+            Crafting modern, high-performance digital experiences with clean design and smooth interactions.
           </p>
-        </div>
+        </motion.div>
 
         {/* Links */}
-        <div className="footer-item">
-          <h3 className="font-semibold mb-4">Navigation</h3>
-          <ul className="space-y-2 text-sm">
-            {["Home", "Services", "Projects", "Contact"].map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2 hover:translate-x-1 transition"
-              >
-                {item} <ArrowUpRight size={14} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <motion.div
+          className="footer-item flex flex-wrap justify-center gap-6 text-sm md:text-base"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          {['Home', 'Services', 'Projects', 'Contact'].map((link) => (
+            <span
+              key={link}
+              className="cursor-pointer text-gray-300 hover:text-green-600 transition font-medium"
+            >
+              {link}
+            </span>
+          ))}
+        </motion.div>
 
         {/* Contact */}
-        <div className="footer-item space-y-3 text-sm">
-          <h3 className="font-semibold mb-4">Contact</h3>
-          <div className="flex items-center gap-2">
-            <Mail size={16} /> hello@agency.com
+        <motion.div
+          className="footer-item flex flex-col items-center gap-3 text-sm"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="flex items-center gap-2 text-gray-300">
+            <Mail size={16} /> hello@orivon.dev
           </div>
-          <div className="flex items-center gap-2">
-            <Phone size={16} /> +91 00000 00000
+          <div className="flex items-center gap-2 text-gray-300">
+            <Phone size={16} /> +91 98765 43210
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-gray-300">
             <MapPin size={16} /> India
           </div>
-        </div>
+        </motion.div>
 
-        {/* CTA */}
-        <div className="footer-item">
-          <h3 className="font-semibold mb-4">Let’s build</h3>
-          <button className="px-5 py-3 rounded-xl bg-black text-white hover:scale-105 transition">
-            Start a Project
-          </button>
-        </div>
-      </motion.div>
+        {/* Socials */}
+        <motion.div
+          className="footer-item flex gap-5 mt-4"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          {[Github, Linkedin, Twitter].map((Icon, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.25, rotate: 5 }}
+              className="p-2! rounded-full bg-green-100 hover:bg-green-200 text-gray-400 cursor-pointer transition"
+            >
+              <Icon size={18} />
+            </motion.div>
+          ))}
+        </motion.div>
 
-      {/* Bottom */}
-      <div className="relative z-10 mt-16 border-t border-gray-300 pt-6 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
-        <p>© {new Date().getFullYear()} Your Agency</p>
-        <p className="text-gray-500">Crafted with precision</p>
+        {/* Bottom */}
+        <div className="text-xs text-gray-400  font-bold mt-4! mb-4! ">
+          © {new Date().getFullYear()} ORIVON Agency. All rights reserved.
+        </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
