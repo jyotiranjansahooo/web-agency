@@ -723,7 +723,8 @@ export default function HeroHeader() {
           style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
         />
       </header>
-      <About/>
+      <About />
+      
     </>
   );
 }
