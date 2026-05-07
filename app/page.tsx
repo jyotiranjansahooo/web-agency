@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import About from "./pages/about";
+import Price from "./components/price"
 
 import {
   motion,
@@ -723,6 +724,7 @@ export default function HeroHeader() {
           style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
         />
       </header>
+      <Price/>
       <About />
     </>
   );

@@ -46,6 +46,7 @@ interface Bubble {
   duration: number;
   opacity: number;
   xOffset: number;
+  xOffset: number;
 }
 
 function BubbleField() {
@@ -57,6 +58,7 @@ function BubbleField() {
       delay: Math.random() * 8,
       duration: Math.random() * 12 + 10,
       opacity: Math.random() * 0.15 + 0.04,
+      xOffset: Math.random() * 40 - 20,
       xOffset: Math.random() * 40 - 20,
     }))
   );
@@ -76,6 +78,7 @@ function BubbleField() {
           animate={{
             y: [120, -160],
             x: [0, b.xOffset, 0],
+            // x: [0, b.xOffset, 0],
             scale: [0.6, 1.1, 0.8],
           }}
           transition={{
@@ -114,8 +117,6 @@ function SkeletonHero() {
     </div>
   );
 }
-
-// ─── STAT COUNTER ─────────────────────────────────────────────────────────────
 
 // ─── SERVICE CARD ─────────────────────────────────────────────────────────────
 interface Service { icon: React.ElementType; title: string; desc: string; tag: string; }
@@ -850,90 +851,7 @@ export default function About() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              {/* ── HERO ── */}
-              {/* <section ref={heroRef} className="hero-section">
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
-                >
-                  <span className="hero-eyebrow">
-                    <Sparkles size={12} />
-                    Web Agency · Est. 2019
-                  </span>
-                </motion.div>
-
-                <div className="hero-tagline">
-                  <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  >
-                    We craft <em>digital</em>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.32 }}
-                  >
-                    experiences that{" "}
-                    <span className="underline-text">matter.</span>
-                  </motion.div>
-                </div>
-
-                <motion.p
-                  className="hero-sub"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.5 }}
-                >
-                  A boutique agency obsessed with performance, design, and outcomes. We
-                  partner with ambitious brands to build products people love.
-                </motion.p>
-
-                <motion.div
-                  className="hero-cta-row"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.65 }}
-                >
-                  <a href="#services" className="btn-primary">
-                    Our Work <ArrowRight size={16} />
-                  </a>
-                  <a href="#team" className="btn-ghost">
-                    <Users size={15} /> Meet the team
-                  </a>
-                </motion.div>
-
-                <div className="hero-scroll-hint">
-                  <div className="scroll-dot" />
-                  scroll to explore
-                </div>
-              </section> */}
-
-              {/* ── MARQUEE ── */}
-              {/* <div className="marquee-wrap">
-                <div ref={marqueeRef} className="marquee-track">
-                  {[...Array(2)].flatMap(() =>
-                    ["Next.js", "React", "Figma", "TypeScript", "GSAP", "Three.js", "AI/ML", "Tailwind", "GraphQL", "Framer"].map(
-                      (t, i) => (
-                        <span key={`${t}-${i}`} className="marquee-item">
-                          <span className="marquee-dot" />
-                          {t}
-                        </span>
-                      )
-                    )
-                  )}
-                </div>
-              </div> */}
-
-              {/* ── STATS ── */}
-              {/* <div className="stats-strip">
-                <StatCounter value={120} suffix="+" label="Projects shipped" />
-                <StatCounter value={98} suffix="%" label="Client satisfaction" />
-                <StatCounter value={6} suffix="yr" label="Industry experience" />
-                <StatCounter value={40} suffix="+" label="Brands served" />
-              </div> */}
+ 
 
               {/* ── SERVICES ── */}
               <section id="services">
