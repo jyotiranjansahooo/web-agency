@@ -45,6 +45,7 @@ interface Bubble {
   delay: number;
   duration: number;
   opacity: number;
+  xOffset: number;
 }
 
 function BubbleField() {
@@ -56,6 +57,7 @@ function BubbleField() {
       delay: Math.random() * 8,
       duration: Math.random() * 12 + 10,
       opacity: Math.random() * 0.15 + 0.04,
+      xOffset: Math.random() * 40 - 20,
     }))
   );
 
@@ -73,7 +75,7 @@ function BubbleField() {
           }}
           animate={{
             y: [120, -160],
-            x: [0, Math.random() * 40 - 20, 0],
+            x: [0, b.xOffset, 0],
             scale: [0.6, 1.1, 0.8],
           }}
           transition={{
@@ -109,35 +111,6 @@ function SkeletonHero() {
       <div className="skel skel-para" />
       <div className="skel skel-para short" />
       <div className="skel skel-btn" />
-    </div>
-  );
-}
-
-// ─── STAT COUNTER ─────────────────────────────────────────────────────────────
-function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const step = value / 60;
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= value) { setCount(value); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, value]);
-
-  return (
-    <div ref={ref} className="stat-item">
-      <span className="stat-number">
-        {count}
-        <span className="stat-suffix">{suffix}</span>
-      </span>
-      <span className="stat-label">{label}</span>
     </div>
   );
 }

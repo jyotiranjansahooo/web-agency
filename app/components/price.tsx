@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -108,11 +108,13 @@ function Bubble({
   x,
   delay,
   duration,
+  xOffset,
 }: {
   size: number;
   x: number;
   delay: number;
   duration: number;
+  xOffset: number;
 }) {
   return (
     <motion.div
@@ -125,7 +127,7 @@ function Bubble({
       }}
       animate={{
         y: [0, -900],
-        x: [0, Math.random() * 60 - 30],
+        x: [0, xOffset],
         opacity: [0, 0.55, 0.4, 0],
         scale: [0.6, 1, 0.9],
       }}
@@ -191,6 +193,15 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export default function Pricing() {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
   const [loading, setLoading] = useState(true);
+  const [bubbles] = useState<Array<{ size: number; x: number; delay: number; duration: number; xOffset: number }>>(() =>
+    Array.from({ length: 18 }, () => ({
+      size: 10 + Math.random() * 50,
+      x: Math.random() * 100,
+      delay: Math.random() * 12,
+      duration: 8 + Math.random() * 14,
+      xOffset: Math.random() * 60 - 30,
+    }))
+  );
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
@@ -269,14 +280,6 @@ export default function Pricing() {
 
     return () => ctx.revert();
   }, [loading]);
-
-  // Bubbles config
-  const bubbles = Array.from({ length: 18 }, (_, i) => ({
-    size: 10 + Math.random() * 50,
-    x: Math.random() * 100,
-    delay: Math.random() * 12,
-    duration: 8 + Math.random() * 14,
-  }));
 
   return (
     <>
