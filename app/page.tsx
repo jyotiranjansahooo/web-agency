@@ -724,7 +724,6 @@ export default function HeroHeader() {
         />
       </header>
       <About />
-      
     </>
   );
 }
